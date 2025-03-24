@@ -1,10 +1,13 @@
 **/predictions
 **/Fairness/All_Emb/Prediction_results
+**/Fairness/All_Emb/TPR_GAPS
 **/Fairness/All_Images/dataframes
+**/Fairness/All_Images/TPR_GAPS
 **/Fairness/All_Images/Prediction_results
 **/Fairness/CheXpert_Emb/DataSet
 **/Fairness/CheXpert_Emb/Prediction_results
 **/Fairness/MIMIC_CXR_EMB/Prediction_results
 **/Fairness/MIMIC_CXR_EMB/Extracted_Embeddings
+**/Fairness/MIMIC_CXR_EMB/__pycache__/
 
 
