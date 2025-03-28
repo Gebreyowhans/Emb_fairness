@@ -51,3 +51,12 @@ def get_diseases_abbr():
             'Lung Opacity': 'Air. Opacity',
             'No Finding': 'No Finding'
             }
+
+
+def get_utility_variables():
+    return {'number_of_runs': 5,
+            'significance_level': 1.96,
+            'height': 6,
+            'font_size': 11,
+            'rotation_degree': 15
+            }

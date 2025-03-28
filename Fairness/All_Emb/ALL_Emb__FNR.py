@@ -38,14 +38,13 @@ def main():
 
         base_path = "./Prediction_results/"
 
-        # Create directory model weightes saving
         fnr_gaps_path = "./FNR_GAPS/"
         os.makedirs(os.path.dirname(fnr_gaps_path), exist_ok=True)
 
-        df = pd.read_csv(f"{base_path}bipred_{seed}.csv").rename(
-            columns={'age decile': 'age_decile'})
+        df = pd.read_csv(f"{base_path}bipred_{seed}.csv")
 
         ''' FNR Disparities '''
+        df = df.reset_index(drop=True)
 
         for i in range(len(factor)):
             FNR_GAPs(

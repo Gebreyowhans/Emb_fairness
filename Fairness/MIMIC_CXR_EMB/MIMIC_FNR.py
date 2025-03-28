@@ -1,5 +1,6 @@
-from config_MIMIC import get_diseases, get_diseases_abbr, get_seeds, get_patient_groups
+from config_MIMIC import get_diseases, get_diseases_abbr, get_seeds, get_patient_groups, get_utility_variables
 
+from FNR_Disparities_MIMIC_CXR import get_Sex_FNR_Disparities, get_Age_FNR_Disparities, get_Race_FNR_Disparities, get_Insurance_FNR_Disparities
 import pandas as pd
 import numpy as np
 import math
@@ -54,8 +55,9 @@ def FNR_GAPs(df, diseases, category, category_name, seed=19, fnr_gaps_results_pa
         GAP_y = []
 
         for d in diseases:
-            pred_disease = "bi_" + d
 
+            pred_disease = "bi_" + d
+            # print(f'Disease : {pred_disease}  category : {c} ')
             pred_fn = df.loc[(df[pred_disease] == 0) & (
                 df[d] == 1) & (df[category_name] == c), :]
 
@@ -377,8 +379,7 @@ def FNR_GAPs(df, diseases, category, category_name, seed=19, fnr_gaps_results_pa
 def main():
 
     diseases = get_diseases()
-    # diseases_abbr = get_diseases_abbr()
-
+    diseases_abbr = get_diseases_abbr()
     patient_groups = get_patient_groups()
 
     gender = patient_groups["sex"]
@@ -386,11 +387,21 @@ def main():
     race = patient_groups["race"]
     insurance = patient_groups["insurance"]
 
+    utility_variables = get_utility_variables()
+
+    number_of_runs = utility_variables['number_of_runs']
+    significance_level = utility_variables['significance_level']
+    height = utility_variables['height']
+    font_size = utility_variables['font_size']
+    rotation_degree = utility_variables['rotation_degree']
+
     factor = [gender, age_decile, race, insurance]
-
     factor_str = ['gender', 'age_decile', 'race', 'insurance']
-
     seeds = get_seeds()
+
+    fnr_base_path = "./FNR_GAPS/"
+    # Create directory fnr saving
+    os.makedirs(os.path.dirname(fnr_base_path), exist_ok=True)
 
     for seed in seeds:
 
@@ -399,20 +410,32 @@ def main():
 
         base_path = "./Prediction_results/"
 
-        # Create directory model weightes saving
-        fnr_gaps_path = "./FNR_GAPS/"
-        os.makedirs(os.path.dirname(fnr_gaps_path), exist_ok=True)
-
         df = pd.read_csv(f"{base_path}bipred_{seed}.csv").rename(
             columns={'age decile': 'age_decile'})
 
-        ''' TPR Disparities '''
+        ''' FNR Disparities '''
 
         for i in range(len(factor)):
             FNR_GAPs(
-                df, diseases, factor[i], factor_str[i], seed, fnr_gaps_path)
+                df, diseases, factor[i], factor_str[i], seed, fnr_base_path)
 
-        print(f'SEED : {seed}')
+    print(f'SEED : {seed}')
+
+    # FNR Disparities for SEX
+    get_Sex_FNR_Disparities(fnr_base_path, diseases, diseases_abbr,
+                            number_of_runs, significance_level, height, font_size, rotation_degree)
+
+    # FNR Disparities for INSURANCE
+    get_Insurance_FNR_Disparities(fnr_base_path, diseases, diseases_abbr,
+                                  number_of_runs, significance_level, height, font_size, rotation_degree)
+
+    # FNR Disparities for RACE
+    get_Race_FNR_Disparities(fnr_base_path, diseases, diseases_abbr,
+                             number_of_runs, significance_level, height, font_size, rotation_degree)
+
+    # FNR Disparities for AGE
+    get_Age_FNR_Disparities(fnr_base_path, diseases, diseases_abbr,
+                            number_of_runs, significance_level, height, font_size, rotation_degree)
 
 
 if __name__ == "__main__":
