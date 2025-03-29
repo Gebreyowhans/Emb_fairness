@@ -127,11 +127,10 @@ def get_Age_FNR_Disparities(basepath, diseases, diseases_abbr, number_of_runs, s
 
     diseases = [disease for disease in diseases if disease != 'No Finding']
 
+    # group by diseases and calculate the mean and std for each disease
     age_dataframes = [seed_19_age, seed_31_age,
                       seed_38_age, seed_47_age, seed_77_age]
     result_age_df = pd.concat(age_dataframes)
-
-    # group by diseases and calculate the mean and std for each disease
     result_age_grouped = result_age_df.groupby("diseases")
     result_age_grouped_stat = result_age_grouped.describe()
 
@@ -162,7 +161,6 @@ def get_Age_FNR_Disparities(basepath, diseases, diseases_abbr, number_of_runs, s
                    result_age_grouped_stat['Gap_0-20']["std"])/np.sqrt(number_of_runs)
 
     prcent_40_list = []
-
     ci_40_list = []
     gap_40_mean_list = []
     diseases_abbr_list = []
@@ -190,6 +188,7 @@ def get_Age_FNR_Disparities(basepath, diseases, diseases_abbr, number_of_runs, s
     mean_list = []
 
     for disease in diseases:
+
         mean_list = []
         cleaned_mean_gap_list = []
         prcent_40_list.append(age_df_40_mean[disease])
@@ -230,6 +229,7 @@ def get_Age_FNR_Disparities(basepath, diseases, diseases_abbr, number_of_runs, s
          "#0-20": prcent_0_list, 'Gap_0-20_mean': gap_0_mean_list, 'CI_0-20': ci_0_list
          }
 
+    # Creating a DataFrame from the dictionary
     age_fnr_disp_df = pd.DataFrame(d)
 
     age_fnr_disp_df = age_fnr_disp_df.sort_values(by='Distance')
@@ -243,15 +243,8 @@ def get_Age_FNR_Disparities(basepath, diseases, diseases_abbr, number_of_runs, s
 def plot_age_FNR_GAPS(basepath, age_fnr_disp_df, height, font_size, rotation_degree):
 
     plt.ioff()
-    plt.rcParams.update(plt.rcParamsDefault)
     plt.rcParams.update({'font.size': font_size})
-
     plt.figure(figsize=(16, height))
-
-    # Checking if DataFrame has data
-    print(f'fnr path : {basepath}')
-    plt.ioff()
-
     plt.scatter(age_fnr_disp_df['diseases_abbr'], age_fnr_disp_df['Gap_60-80_mean'],
                 s=np.multiply(age_fnr_disp_df['#60-80'], 0.5), marker='o', color='blue', label="60-80")
     plt.errorbar(age_fnr_disp_df['diseases_abbr'], age_fnr_disp_df['Gap_60-80_mean'],
@@ -281,10 +274,7 @@ def plot_age_FNR_GAPS(basepath, age_fnr_disp_df, height, font_size, rotation_deg
     plt.legend()
     plt.grid(True)
 
-    if plt.gcf().get_axes():
-        plt.savefig(basepath+"FNR_Dis_Age.pdf")
-    else:
-        print("No figure to save")
+    # plt.savefig(basepath+"FNR_Dis_Age.pdf")
 
     plt.close()
 

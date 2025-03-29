@@ -1,6 +1,7 @@
 from config_MIMIC import get_diseases, get_diseases_abbr, get_seeds, get_patient_groups, get_utility_variables
 
 from FNR_Disparities_MIMIC_CXR import get_Sex_FNR_Disparities, get_Age_FNR_Disparities, get_Race_FNR_Disparities, get_Insurance_FNR_Disparities
+
 import pandas as pd
 import numpy as np
 import math
@@ -39,7 +40,7 @@ def FNR_GAPs(df, diseases, category, category_name, seed=19, fnr_gaps_results_pa
     if category_name == 'gender':
         FNR_Sex = pd.DataFrame(diseases, columns=["diseases"])
 
-    if category_name == 'age_decile':
+    if category_name == 'age_decile' or category_name == 'age decile':
         FNR_Age = pd.DataFrame(diseases, columns=["diseases"])
 
     if category_name == 'race':
@@ -128,7 +129,7 @@ def FNR_GAPs(df, diseases, category, category_name, seed=19, fnr_gaps_results_pa
 
     for i in range(len(GAP_total)):
 
-        if category_name == 'age_decile':
+        if category_name == 'age_decile' or category_name == 'age decile':
 
             if i == 0:
                 img_count_0 = pd.DataFrame(
