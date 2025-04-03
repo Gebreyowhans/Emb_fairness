@@ -3,6 +3,7 @@ import torch.nn as nn
 import torch.nn.init as init
 import torchvision.models as models
 
+
 class DensNetWithHead(nn.Module):
     def __init__(self,  hidden_layer_sizes, dropout_rate, num_classes):
         super(DensNetWithHead, self).__init__()

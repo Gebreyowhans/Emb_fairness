@@ -11,15 +11,15 @@ plt.rcParams['ps.fonttype'] = 42
 def get_Sex_FNR_Disparities(basepath, diseases, diseases_abbr, number_of_runs, significance_level,
                             height, font_size, rotation_degree):
     seed_19_sex = pd.read_csv(
-        basepath+"Run_seed19_FNR_GAP_sex.csv", index_col=0)
+        basepath+"Run_seed32_FNR_GAP_sex.csv", index_col=0)
     seed_31_sex = pd.read_csv(
-        basepath+"Run_seed31_FNR_GAP_sex.csv", index_col=0)
+        basepath+"Run_seed40_FNR_GAP_sex.csv", index_col=0)
     seed_38_sex = pd.read_csv(
-        basepath+"Run_seed38_FNR_GAP_sex.csv", index_col=0)
+        basepath+"Run_seed56_FNR_GAP_sex.csv", index_col=0)
     seed_47_sex = pd.read_csv(
-        basepath+"Run_seed47_FNR_GAP_sex.csv", index_col=0)
+        basepath+"Run_seed60_FNR_GAP_sex.csv", index_col=0)
     seed_77_sex = pd.read_csv(
-        basepath+"Run_seed77_FNR_GAP_sex.csv", index_col=0)
+        basepath+"Run_seed90_FNR_GAP_sex.csv", index_col=0)
 
     diseases = [disease for disease in diseases if disease != 'No Finding']
 
@@ -115,15 +115,15 @@ def get_Age_FNR_Disparities(basepath, diseases, diseases_abbr, number_of_runs, s
                             height, font_size, rotation_degree):
 
     seed_19_age = pd.read_csv(
-        basepath+"Run_seed19_FNR_GAP_Age.csv", index_col=0)
+        basepath+"Run_seed32_FNR_GAP_Age.csv", index_col=0)
     seed_31_age = pd.read_csv(
-        basepath+"Run_seed31_FNR_GAP_Age.csv", index_col=0)
+        basepath+"Run_seed40_FNR_GAP_Age.csv", index_col=0)
     seed_38_age = pd.read_csv(
-        basepath+"Run_seed38_FNR_GAP_Age.csv", index_col=0)
+        basepath+"Run_seed56_FNR_GAP_Age.csv", index_col=0)
     seed_47_age = pd.read_csv(
-        basepath+"Run_seed47_FNR_GAP_Age.csv", index_col=0)
+        basepath+"Run_seed60_FNR_GAP_Age.csv", index_col=0)
     seed_77_age = pd.read_csv(
-        basepath+"Run_seed77_FNR_GAP_Age.csv", index_col=0)
+        basepath+"Run_seed90_FNR_GAP_Age.csv", index_col=0)
 
     diseases = [disease for disease in diseases if disease != 'No Finding']
 
@@ -294,8 +294,6 @@ def get_Race_FNR_Disparities(basepath, diseases, diseases_abbr, number_of_runs, 
     seed_77_race = pd.read_csv(
         basepath + "Run_seed77_FNR_GAP_race.csv", index_col=0)
 
-    diseases = [disease for disease in diseases if disease != 'No Finding']
-
     # group by diseases and calculate the mean and std for each disease
     race_dataframes = [seed_19_race, seed_31_race,
                        seed_38_race, seed_47_race, seed_77_race]
@@ -417,8 +415,8 @@ def get_Race_FNR_Disparities(basepath, diseases, diseases_abbr, number_of_runs, 
     race_fnr_disp_df.to_csv(basepath+"race_fnr_disp.csv", index=False)
 
     # Plotting the results
-    # plot_race_FNR_GAPS(basepath, race_fnr_disp_df, height,
-    #                    font_size, rotation_degree)
+    plot_race_FNR_GAPS(basepath, race_fnr_disp_df, height,
+                       font_size, rotation_degree)
 
 
 def plot_race_FNR_GAPS(basepath, race_fnr_disp_df, height, font_size, rotation_degree):
@@ -483,8 +481,6 @@ def get_Insurance_FNR_Disparities(basepath, diseases, diseases_abbr, number_of_r
 
     insurance_dataframes = [seed_19_insurance, seed_31_insurance, seed_38_insurance,
                             seed_47_insurance, seed_77_insurance]
-
-    diseases = [disease for disease in diseases if disease != 'No Finding']
 
     # group by diseases and calculate the mean and std for each disease
     result_insurance_df = pd.concat(insurance_dataframes)

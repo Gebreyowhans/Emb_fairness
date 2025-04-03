@@ -9,5 +9,8 @@
 **/Fairness/MIMIC_CXR_EMB/Prediction_results
 **/Fairness/MIMIC_CXR_EMB/Extracted_Embeddings
 **/Fairness/MIMIC_CXR_EMB/__pycache__/
+**/CheXpert_Img/Prediction_results
+**/CheXpert_Img/__pycache__
+**/MIMIC_CXR_Img/Prediction_results
 
 
