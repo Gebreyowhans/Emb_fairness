@@ -55,10 +55,8 @@ def FP_FN_NF_MIMIC(df, diseases, category, category_name, seed=19, fpr_npr_path=
 
         for d in diseases:
             pred_disease = "bi_" + d
-            
             gt_fp = df.loc[(df[d] == 0) & (df[category_name] == c), :]
             gt_fn = df.loc[(df[d] == 1) & (df[category_name] == c), :]
-            
             pred_fp = df.loc[(df[pred_disease] == 1) & (
                 df[d] == 0) & (df[category_name] == c), :]
             pred_fn = df.loc[(df[pred_disease] == 0) & (
