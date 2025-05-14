@@ -13,4 +13,13 @@
 **/CheXpert_Img/__pycache__
 **/MIMIC_CXR_Img/Prediction_results
 
+**/Fairness/All_Emb/FPR_GAPS
+**/Fairness/All_Images/FPR_GAPS
+**/Fairness/CheXpert_Emb/FPR_GAPS
+**/Fairness/MIMIC_CXR_EMB/FPR_GAPS
+**/Fairness/MIMIC_CXR_Img/FPR_GAPS
+**/Fairness/CheXpert_Img/FPR_GAPS
+
+
+
 
