@@ -19,6 +19,9 @@
 **/Fairness/MIMIC_CXR_EMB/FPR_GAPS
 **/Fairness/MIMIC_CXR_Img/FPR_GAPS
 **/Fairness/CheXpert_Img/FPR_GAPS
+**/Fairness/CheXpert_Img/FPR_GAPS
+
+**/Fairness/MIMIC_CXR_EMB/AUC_GAPS
 
 
 

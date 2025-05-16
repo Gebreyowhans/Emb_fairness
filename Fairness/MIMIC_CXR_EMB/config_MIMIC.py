@@ -15,6 +15,25 @@ def get_patient_groups():
 
     return groups
 
+def get_patient_groups_abbr():
+
+    return {'M': 'M',
+            'F': 'F',
+            'WHITE': 'White',
+            'BLACK/AFRICAN AMERICAN': 'Black',
+            'HISPANIC/LATINO': 'Hisp',
+            'OTHER': 'Other',
+            'ASIAN': 'Asian',
+            'AMERICAN INDIAN/ALASKA NATIVE': 'American',
+            '60-80': '60-80',
+            '40-60': '40-60',
+            '20-40': '20-40',
+            '80+': '80-',
+            '0-20': '0-20',
+            'Medicare': 'medicare',
+            'Other': 'other',
+            'Medicaid': 'medicaid'
+            }
 
 def get_diseases():
     return ['Enlarged Cardiomediastinum',
