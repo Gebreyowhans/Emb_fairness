@@ -4,24 +4,44 @@ import numpy as np
 import math
 import matplotlib.pyplot as plt
 
-def get_Sex_Auc_Disparities(basepath, diseases, diseases_abbr, number_of_runs, significance_level):
+def get_Sex_Auc_Disparities(basepath, diseases, diseases_abbr, number_of_runs, significance_level,dataset_type="default"):
     
-    seed_19_sex = pd.read_csv(
-        basepath+"Run_seed19_gender_AUC_GAP.csv", index_col=0)
-
-    seed_31_sex = pd.read_csv(
-        basepath+"Run_seed31_gender_AUC_GAP.csv", index_col=0)
-    seed_38_sex = pd.read_csv(
-        basepath+"Run_seed38_gender_AUC_GAP.csv", index_col=0)
-    seed_47_sex = pd.read_csv(
-        basepath+"Run_seed47_gender_AUC_GAP.csv", index_col=0)
-    seed_77_sex = pd.read_csv(
-        basepath+"Run_seed77_gender_AUC_GAP.csv", index_col=0)
+    if dataset_type == 'CheXpert_Img':
+        
+        first_run_sex = pd.read_csv(
+            basepath+"Run_seed32_gender_AUC_GAP.csv", index_col=0)
+        
+        second_run_sex = pd.read_csv(
+            basepath+"Run_seed40_gender_AUC_GAP.csv", index_col=0)
+        
+        third_run_sex = pd.read_csv(
+            basepath+"Run_seed56_gender_AUC_GAP.csv", index_col=0)
+        
+        fourth_run_sex = pd.read_csv(
+            basepath+"Run_seed60_gender_AUC_GAP.csv", index_col=0)
+        
+        fifth_run_sex = pd.read_csv(basepath+"Run_seed90_gender_AUC_GAP.csv", index_col=0)
+        
+    else:
+        first_run_sex = pd.read_csv(
+            basepath+"Run_seed19_gender_AUC_GAP.csv", index_col=0)
+        
+        second_run_sex = pd.read_csv(
+            basepath+"Run_seed31_gender_AUC_GAP.csv", index_col=0)
+        
+        third_run_sex = pd.read_csv(
+            basepath+"Run_seed38_gender_AUC_GAP.csv", index_col=0)
+        
+        fourth_run_sex = pd.read_csv(
+            basepath+"Run_seed47_gender_AUC_GAP.csv", index_col=0)
+        
+        fifth_run_sex = pd.read_csv(
+            basepath+"Run_seed77_gender_AUC_GAP.csv", index_col=0)
 
     diseases = [disease for disease in diseases if disease != 'No Finding']
 
-    sex_dataframes = [seed_19_sex, seed_31_sex,
-                      seed_38_sex, seed_47_sex, seed_77_sex]
+    sex_dataframes = [first_run_sex, second_run_sex,
+                      third_run_sex, fourth_run_sex, fifth_run_sex]
     result_sex = pd.concat(sex_dataframes)
 
     # group by diseases and calculate the mean and std for each disease
@@ -69,25 +89,36 @@ def get_Sex_Auc_Disparities(basepath, diseases, diseases_abbr, number_of_runs, s
 
     sex_auc_disp_df.to_csv(basepath+"sex_auc_disp.csv", index=False)
 
+def get_Age_Auc_Disparities(basepath, diseases, diseases_abbr, number_of_runs, significance_level,dataset_type="default"):
 
-def get_Age_Auc_Disparities(basepath, diseases, diseases_abbr, number_of_runs, significance_level):
-
-    seed_19_age = pd.read_csv(
-        basepath+"Run_seed19_age_decile_AUC_GAP.csv", index_col=0)
-    seed_31_age = pd.read_csv(
-        basepath+"Run_seed31_age_decile_AUC_GAP.csv", index_col=0)
-    seed_38_age = pd.read_csv(
-        basepath+"Run_seed38_age_decile_AUC_GAP.csv", index_col=0)
-    seed_47_age = pd.read_csv(
-        basepath+"Run_seed47_age_decile_AUC_GAP.csv", index_col=0)
-    seed_77_age = pd.read_csv(
-        basepath+"Run_seed77_age_decile_AUC_GAP.csv", index_col=0)
+    if dataset_type == 'CheXpert_Img':
+        first_run_age = pd.read_csv(
+            basepath+"Run_seed32_age_decile_AUC_GAP.csv", index_col=0)
+        second_run_age = pd.read_csv(
+            basepath+"Run_seed40_age_decile_AUC_GAP.csv", index_col=0)
+        third_run_age = pd.read_csv(
+            basepath+"Run_seed56_age_decile_AUC_GAP.csv", index_col=0)
+        fourth_run_age = pd.read_csv(
+            basepath+"Run_seed60_age_decile_AUC_GAP.csv", index_col=0)
+        fifth_run_age = pd.read_csv(
+            basepath+"Run_seed90_age_decile_AUC_GAP.csv", index_col=0)
+    else:
+        first_run_age = pd.read_csv(
+            basepath+"Run_seed19_age_decile_AUC_GAP.csv", index_col=0)
+        second_run_age = pd.read_csv(
+            basepath+"Run_seed31_age_decile_AUC_GAP.csv", index_col=0)
+        third_run_age = pd.read_csv(
+            basepath+"Run_seed38_age_decile_AUC_GAP.csv", index_col=0)
+        fourth_run_age = pd.read_csv(
+            basepath+"Run_seed47_age_decile_AUC_GAP.csv", index_col=0)
+        fifth_run_age = pd.read_csv(
+            basepath+"Run_seed77_age_decile_AUC_GAP.csv", index_col=0)
 
     diseases = [disease for disease in diseases if disease != 'No Finding']
 
     # group by diseases and calculate the mean and std for each disease
-    age_dataframes = [seed_19_age, seed_31_age,
-                      seed_38_age, seed_47_age, seed_77_age]
+    age_dataframes = [first_run_age, second_run_age,
+                      third_run_age, fourth_run_age, fifth_run_age]
     
     result_age_df = pd.concat(age_dataframes)
     result_age_grouped = result_age_df.groupby("diseases")
@@ -187,25 +218,43 @@ def get_Age_Auc_Disparities(basepath, diseases, diseases_abbr, number_of_runs, s
     age_auc_disp_df = age_auc_disp_df.sort_values(by='Distance')
     age_auc_disp_df.to_csv(basepath+"age_auc_disp.csv", index=False)
 
-def get_Race_Auc_Disparities(basepath, diseases, diseases_abbr, number_of_runs, significance_level):
+def get_Race_Auc_Disparities(basepath, diseases, diseases_abbr, number_of_runs, significance_level,dataset_type="default"):
 
-    seed_19_race = pd.read_csv(basepath +
-                               "Run_seed19_race_AUC_GAP.csv", index_col=0)
-    seed_31_race = pd.read_csv(basepath +
-                               "Run_seed31_race_AUC_GAP.csv", index_col=0)
-    seed_38_race = pd.read_csv(
-        basepath + "Run_seed38_race_AUC_GAP.csv", index_col=0)
-    seed_47_race = pd.read_csv(
-        basepath + "Run_seed47_race_AUC_GAP.csv", index_col=0)
+    
+    if dataset_type == 'CheXpert_Img':
+        
+        first_run_race = pd.read_csv(basepath +
+                                "Run_seed32_race_AUC_GAP.csv", index_col=0)
+        second_run_race = pd.read_csv(basepath +
+                                "Run_seed40_race_AUC_GAP.csv", index_col=0)
+        third_run_race = pd.read_csv(
+            basepath + "Run_seed56_race_AUC_GAP.csv", index_col=0)
+        fourth_run_race = pd.read_csv(
+            basepath + "Run_seed60_race_AUC_GAP.csv", index_col=0)
 
-    seed_77_race = pd.read_csv(
-        basepath + "Run_seed77_race_AUC_GAP.csv", index_col=0)
+        fifth_run_race = pd.read_csv(
+            basepath + "Run_seed90_race_AUC_GAP.csv", index_col=0)
+        
+    else:
+        
+        first_run_race = pd.read_csv(basepath +
+                                "Run_seed19_race_AUC_GAP.csv", index_col=0)
+        second_run_race = pd.read_csv(basepath +
+                                "Run_seed31_race_AUC_GAP.csv", index_col=0)
+        third_run_race = pd.read_csv(
+            basepath + "Run_seed38_race_AUC_GAP.csv", index_col=0)
+        fourth_run_race = pd.read_csv(
+            basepath + "Run_seed47_race_AUC_GAP.csv", index_col=0)
+
+        fifth_run_race = pd.read_csv(
+            basepath + "Run_seed77_race_AUC_GAP.csv", index_col=0)
 
     diseases = [disease for disease in diseases if disease != 'No Finding']
 
     # group by diseases and calculate the mean and std for each disease
-    race_dataframes = [seed_19_race, seed_31_race,
-                       seed_38_race, seed_47_race, seed_77_race]
+    race_dataframes = [first_run_race, second_run_race,
+                       third_run_race, fourth_run_race, fifth_run_race]
+    
     result_race_df = pd.concat(race_dataframes)
 
     result_race_grouped = result_race_df.groupby("diseases")
@@ -312,20 +361,34 @@ def get_Race_Auc_Disparities(basepath, diseases, diseases_abbr, number_of_runs, 
     race_auc_disp_df = race_auc_disp_df.sort_values(by='Distance')
     race_auc_disp_df.to_csv(basepath+"race_auc_disp.csv", index=False)
 
-def get_Insurance_Auc_Disparities(basepath, diseases, diseases_abbr, number_of_runs, significance_level):
-    seed_19_insurance = pd.read_csv(
-        basepath+"Run_seed19_insurance_AUC_GAP.csv", index_col=0)
-    seed_31_insurance = pd.read_csv(
-        basepath+"Run_seed31_insurance_AUC_GAP.csv", index_col=0)
-    seed_38_insurance = pd.read_csv(
-        basepath+"Run_seed38_insurance_AUC_GAP.csv", index_col=0)
-    seed_47_insurance = pd.read_csv(
-        basepath+"Run_seed47_insurance_AUC_GAP.csv", index_col=0)
-    seed_77_insurance = pd.read_csv(
-        basepath+"Run_seed77_insurance_AUC_GAP.csv", index_col=0)
+def get_Insurance_Auc_Disparities(basepath, diseases, diseases_abbr, number_of_runs, significance_level,dataset_type="default"):
+    
+    if dataset_type == 'CheXpert_Img':
+        first_run_insurance = pd.read_csv(
+            basepath+"Run_seed32_insurance_AUC_GAP.csv", index_col=0)
+        second_run_insurance = pd.read_csv(
+            basepath+"Run_seed40_insurance_AUC_GAP.csv", index_col=0)
+        third_run_insurance = pd.read_csv(
+            basepath+"Run_seed56_insurance_AUC_GAP.csv", index_col=0)
+        fourth_run_insurance = pd.read_csv(
+            basepath+"Run_seed60_insurance_AUC_GAP.csv", index_col=0)
+        fifth_run_insurance = pd.read_csv(
+            basepath+"Run_seed90_insurance_AUC_GAP.csv", index_col=0)
+           
+    else:
+        first_run_insurance = pd.read_csv(
+            basepath+"Run_seed19_insurance_AUC_GAP.csv", index_col=0)
+        second_run_insurance = pd.read_csv(
+            basepath+"Run_seed31_insurance_AUC_GAP.csv", index_col=0)
+        third_run_insurance = pd.read_csv(
+            basepath+"Run_seed38_insurance_AUC_GAP.csv", index_col=0)
+        fourth_run_insurance = pd.read_csv(
+            basepath+"Run_seed47_insurance_AUC_GAP.csv", index_col=0)
+        fifth_run_insurance = pd.read_csv(
+            basepath+"Run_seed77_insurance_AUC_GAP.csv", index_col=0)
 
-    insurance_dataframes = [seed_19_insurance, seed_31_insurance, seed_38_insurance,
-                            seed_47_insurance, seed_77_insurance]
+    insurance_dataframes = [first_run_insurance, second_run_insurance, third_run_insurance,
+                            fourth_run_insurance, fifth_run_insurance]
 
     diseases = [disease for disease in diseases if disease != 'No Finding']
 
