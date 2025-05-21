@@ -25,10 +25,11 @@
 # Ignore all prediction results
 **/Prediction_results/
 
-# Ignore all TPR_GAPS, FPR_GAPS, AUC_GAPS
+# Ignore all TPR_GAPS, FPR_GAPS, AUC_GAPS,FPR
 **/TPR_GAPS/
 **/FPR_GAPS/
 **/AUC_GAPS/
+**/FPR/
 
 # Ignore all extracted embeddings and dataset folders
 **/Extracted_Embeddings/
