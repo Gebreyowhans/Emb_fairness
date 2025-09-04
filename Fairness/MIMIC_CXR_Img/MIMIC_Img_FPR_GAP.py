@@ -24,7 +24,7 @@ def main():
     diseases_abbr = get_diseases_abbr()
     patient_groups = get_patient_groups()
     gender = patient_groups["sex"]
-    age_decile = patient_groups["age"]
+    age_decile = patient_groups["age_2"]
     race = patient_groups["race"]
     insurance = patient_groups["insurance"]
 

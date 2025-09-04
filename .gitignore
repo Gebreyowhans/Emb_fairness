@@ -1,35 +1,6 @@
-#**/predictions
-#**/Fairness/All_Emb/Prediction_results
-#**/Fairness/All_Emb/TPR_GAPS
-#**/Fairness/All_Images/dataframes
-#**/Fairness/All_Images/TPR_GAPS
-#**/Fairness/All_Images/Prediction_results
-#**/Fairness/CheXpert_Emb/DataSet
-#**/Fairness/CheXpert_Emb/Prediction_results
-#**/Fairness/MIMIC_CXR_EMB/Prediction_results
-#**/Fairness/MIMIC_CXR_EMB/Extracted_Embeddings
-#**/Fairness/MIMIC_CXR_EMB/__pycache__/
-#**/CheXpert_Img/Prediction_results
-#**/CheXpert_Img/__pycache__
-#**/MIMIC_CXR_Img/Prediction_results
-
-#**/Fairness/All_Emb/FPR_GAPS
-#**/Fairness/All_Images/FPR_GAPS
-#**/Fairness/CheXpert_Emb/FPR_GAPS
-#**/Fairness/MIMIC_CXR_EMB/FPR_GAPS
-#**/Fairness/MIMIC_CXR_Img/FPR_GAPS
-#**/Fairness/CheXpert_Img/FPR_GAPS
-#**/Fairness/CheXpert_Img/FPR_GAPS
-#**/Fairness/MIMIC_CXR_EMB/AUC_GAPS
 
 # Ignore all prediction results
 **/Prediction_results/
-
-# Ignore all TPR_GAPS, FPR_GAPS, AUC_GAPS,FPR
-**/TPR_GAPS/
-**/FPR_GAPS/
-**/AUC_GAPS/
-**/FPR/
 
 # Ignore all extracted embeddings and dataset folders
 **/Extracted_Embeddings/

@@ -14,6 +14,7 @@ import warnings
 
 from config_MIMIC import get_diseases, get_diseases_abbr, get_seeds, get_patient_groups
 
+from Actual_TPR import TPR_Disparities
 
 def tpr(df, d, c, category_name):
 

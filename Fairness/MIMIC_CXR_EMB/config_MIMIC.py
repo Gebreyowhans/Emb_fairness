@@ -7,6 +7,7 @@ def get_patient_groups():
     groups = {
         "sex": ['M', 'F'],
         "age": ['60-80', '40-60', '20-40', '80+', '0-20'],
+        "age_2": ['60-80', '40-60', '20-40', '80-', '0-20'],
         "race": ['WHITE', 'BLACK/AFRICAN AMERICAN',
                  'HISPANIC/LATINO', 'OTHER', 'ASIAN',
                  'AMERICAN INDIAN/ALASKA NATIVE'],
@@ -29,6 +30,7 @@ def get_patient_groups_abbr():
             '40-60': '40-60',
             '20-40': '20-40',
             '80+': '80-',
+            '80-': '80-',
             '0-20': '0-20',
             'Medicare': 'medicare',
             'Other': 'other',
